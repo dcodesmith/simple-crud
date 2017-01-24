@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node_modules/mocha/bin/_mocha -- --ui bdd --reporter spec --colors test"
+    "test": "node_modules/mocha/bin/mocha test/**/*.spec.js"
   },
   "author": "Afees Dammy Kolawole",
   "license": "ISC",
@@ -41,8 +41,7 @@
     "run-sequence": "^1.2.2",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
-    "supertest": "^2.0.0",
-    "supertest-as-promised": "^4.0.2",
+    "supertest": "^2.0.1",
     "yargs": "^6.0.0"
   }
 }
