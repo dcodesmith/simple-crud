@@ -1,4 +1,4 @@
-const request = require('supertest-as-promised');
+const request = require('supertest');
 const httpStatus = require('http-status');
 const chai = require('chai');
 
@@ -118,7 +118,7 @@ describe('## User APIs', () => {
       });
     });
 
-    describe.skip('Given an employee does NOT exist', () => {
+    describe('Given an employee does NOT exist', () => {
       const email = 'i@dontexist.com';
 
       describe('When a request is made to update the employee details', () => {
@@ -142,7 +142,7 @@ describe('## User APIs', () => {
   });
 
   describe.skip('# GET /api/employees/', () => {
-    describe('Given there are employee', () => {
+    describe('Given there are employees', () => {
       const email = 'me@dcodesmith.com';
 
       describe('When a request is made to get the employee', () => {
@@ -164,17 +164,26 @@ describe('## User APIs', () => {
     });
   });
 
-  describe.skip('# DELETE /api/employees/:email', () => {
-    it('should delete user', (done) => {
-      request(app)
-        .delete(`/api/users/${user._id}`)
-        .expect(httpStatus.OK)
-        .then((res) => {
-          expect(res.body.username).to.equal('KK');
-          expect(res.body.mobileNumber).to.equal(user.mobileNumber);
-          done();
-        })
-        .catch(done);
+  describe('# DELETE /api/employees/:email', () => {
+    describe('Given an employee', () => {
+      const email = 'me@dcodesmith.com';
+
+      describe('When a request is made to get the employee', () => {
+        before(() => {
+          requestPromise = request(app)
+                .del(`/api/employees/${email}`);
+        });
+
+        it('should get the employee', (done) => {
+          requestPromise
+            .expect(httpStatus.NO_CONTENT)
+            .then((res) => {
+              expect(res.body).to.eql({});
+              done();
+            })
+            .catch(done);
+        });
+      });
     });
   });
 });
