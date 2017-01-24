@@ -1,0 +1,7 @@
+test.csv
+.DS_Store
+*.txt
+
+coverage
+dist
+node_modules
