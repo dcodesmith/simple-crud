@@ -1,0 +1,57 @@
+.employee-table-container {
+    width: 100%;
+    border: 1px solid #555;
+    display: inline-block;
+    padding: 10px 20px 10px;
+    margin-top: 20px;
+
+    .employee-table-header {
+        float: left;
+        width: 100%;
+        margin: 10px 0 15px;
+    }
+
+    .title {
+        margin: 0;
+        float: left;
+        line-height: 1.6;        
+    }
+
+    .btn {
+        float: right;
+    }
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+
+    td, th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    td:last-child {
+        text-align: center;
+
+        .btn-delete {
+            width: 30px;
+        }
+    }
+
+    tr {
+        &:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        &:hover {
+        background: #ddd;
+        }
+    }
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+    }
+}
