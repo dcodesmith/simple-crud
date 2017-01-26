@@ -14,16 +14,21 @@ export default function employeeReducer(state = initialState.employees, action) 
     }
 
     case READ_EMPLOYEES_SUCCESS: {
+      console.log('read', action);
+
       return action.employees;
     }
 
     case UPDATE_EMPLOYEE_SUCCESS: {
-      console.log('state', state);
-      console.log('action.employee', action.employee);
+      const index = findIndex(state, action.employee.row);
 
-      // find the object index, pull it out, extend it and put it back in;
-      let s = [...state];
-      return [];
+      console.log('state', state);
+      console.log('lll', ...state.slice(0, index));
+
+      return [
+        ...state.slice(0, index),
+        Object.assign({}, state[index], action.employee.fieldsToUpdate)
+      ];
     }
 
     case DELETE_EMPLOYEE_SUCCESS: {
