@@ -1,3 +1,4 @@
+import { findIndex } from 'lodash';
 import {
   CREATE_EMPLOYEE_SUCCESS,
   READ_EMPLOYEES_SUCCESS,
@@ -6,16 +7,14 @@ import {
 } from '../actions/constants';
 import initialState from './initialState';
 
-// Consider using immutable.js here
-
 export default function employeeReducer(state = initialState.employees, action) {
   switch (action.type) {
     case CREATE_EMPLOYEE_SUCCESS: {
-      return [...state, ...action.programmes];
+      return [...state, action.employee];
     }
 
     case READ_EMPLOYEES_SUCCESS: {
-      return action.programmes;
+      return action.employees;
     }
 
     case UPDATE_EMPLOYEE_SUCCESS: {
@@ -24,8 +23,12 @@ export default function employeeReducer(state = initialState.employees, action) 
     }
 
     case DELETE_EMPLOYEE_SUCCESS: {
-      let s = [...state];
-      return [];
+      const index = findIndex(state, action.employee);
+
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ];
     }
 
     default:

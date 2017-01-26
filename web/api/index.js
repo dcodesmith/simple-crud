@@ -1,40 +1,35 @@
-import qs from 'querystring';
+import request from 'superagent';
 
 const API_URL = 'http://localhost:8080/api/employees';
 
 class EmployeeApi {
 
   static create(data) {
-    return fetch(API_URL, {
-      method: 'POST',
-      body: data
-    }).then(response => {
-      return response.json();
-    });
+    return request.post(API_URL)
+            .send(data)
+            .then(response => response.body);
   }
 
-  static readAll(query) {
-    let url = API_URL;
-    let queryString;
-
-    if (query) {
-      queryString = qs.stringify(query);
-      url += `?${queryString}`;
-    }
-
-    return fetch(url).then(response => {
-      return response.json();
-    });
+  static readAll(query = {}) {
+    return request
+            .get(API_URL)
+            .query(query)
+            .then(response => response.body);
   }
 
-  static update(data) {}
+  static update(email, data) {
+    return request.put(`${API_URL}/${email}`)
+            .send(data);
+  }
 
-  static delete(id) {
-    return fetch(API_URL, {
-      method: 'DELETE'
-    }).then(response => {
-      return response.json();
-    });
+  static delete(row) {
+    return request
+            .del(`${API_URL}/${row.email}`)
+            .then((response) => {
+              if (response.statusCode === 204 && response.ok) {
+                return row;
+              }
+            });
   }
 
 }

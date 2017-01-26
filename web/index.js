@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import configureStore from './store';
-import App from './containers'
+import App from './components/App'
 import './styles/Base.less';
 
 const store = configureStore();
@@ -16,3 +16,13 @@ render(
   </Provider>,
   document.getElementById('app')
 )
+
+console.error = (() => {
+    var error = console.error
+
+    return (exception) => {
+        if ((exception + '').indexOf('Warning: A component is `contentEditable`') != 0) {
+            error.apply(console, arguments)
+        }
+    }
+})();

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import employee from './employeeReducer';
+import employees from './employeeReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
-  employee,
+  employees,
   ajaxCallsInProgress
 });
 
