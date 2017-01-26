@@ -17,9 +17,14 @@ class EmployeeApi {
             .then(response => response.body);
   }
 
-  static update(email, data) {
-    return request.put(`${API_URL}/${email}`)
-            .send(data);
+  static update(row, data) {
+    return request.put(`${API_URL}/${row.email}`)
+            .send(data)
+            .then((response) => {
+              if (response.statusCode === 204 && response.ok) {
+                return row;
+              }
+            });
   }
 
   static delete(row) {

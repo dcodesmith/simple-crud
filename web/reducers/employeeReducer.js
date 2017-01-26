@@ -18,6 +18,10 @@ export default function employeeReducer(state = initialState.employees, action) 
     }
 
     case UPDATE_EMPLOYEE_SUCCESS: {
+      console.log('state', state);
+      console.log('action.employee', action.employee);
+
+      // find the object index, pull it out, extend it and put it back in;
       let s = [...state];
       return [];
     }

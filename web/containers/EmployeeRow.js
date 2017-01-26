@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { deleteEmployee } from '../actions';
+import { deleteEmployee, updateEmployee } from '../actions';
 
 import EmployeeTableRow from '../components/EmployeeTableRow';
 
@@ -13,7 +13,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onDelete: row => dispatch(deleteEmployee(row))
+    onDelete: row => dispatch(deleteEmployee(row)),
+    onUpdate: (oldEmployee, newEmployee) => dispatch(updateEmployee(oldEmployee, newEmployee))
   };
 }
 

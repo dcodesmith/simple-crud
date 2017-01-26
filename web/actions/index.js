@@ -47,10 +47,13 @@ export function readEmployees() {
   };
 }
 
-export function updateEmployees() {
+export function updateEmployee(old, newData) {
+  console.log('old', old);
+  console.log('newData', newData);
+
   return (dispatch) => {
     dispatch(beginAjaxCall());
-    return api.update().then((employees) => {
+    return api.update(old, newData).then((employees) => {
       dispatch(updateEmployeeSuccess(employees));
     }).catch((error) => {
       dispatch(ajaxCallError());
