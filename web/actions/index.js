@@ -2,7 +2,8 @@ import {
   CREATE_EMPLOYEE_SUCCESS,
   READ_EMPLOYEES_SUCCESS,
   UPDATE_EMPLOYEE_SUCCESS,
-  DELETE_EMPLOYEE_SUCCESS
+  DELETE_EMPLOYEE_SUCCESS,
+  SORT_EMPLOYEES_SUCCESS
 } from './constants';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 import api from '../api';
@@ -21,6 +22,10 @@ export function updateEmployeeSuccess(employee) {
 
 export function deteleEmployeeSuccess(employee) {
   return { type: DELETE_EMPLOYEE_SUCCESS, employee };
+}
+
+export function sortEmployeesSuccess(employees) {
+  return { type: SORT_EMPLOYEES_SUCCESS, employees };
 }
 
 export function createEmployee(data) {
@@ -48,9 +53,6 @@ export function readEmployees() {
 }
 
 export function updateEmployee(old, newData) {
-  console.log('old', old);
-  console.log('newData', newData);
-
   return (dispatch) => {
     dispatch(beginAjaxCall());
     return api.update(old, newData).then((employees) => {
@@ -73,4 +75,25 @@ export function deleteEmployee(email) {
       throw(error);
     });
   };
+}
+
+export function sortEmployees(data, field) {
+  return (dispatch) => {
+    data.sort((a, b) => {
+      // console.log('a', a);
+      // console.log('b', b);
+
+      if (a[field] < b[field] ) {
+        return -1;
+      }
+
+      if (a[field] < b[field] ) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    dispatch();
+  }
 }

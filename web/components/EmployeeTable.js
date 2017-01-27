@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import TableHeader from './EmployeeTableHeader';
+import TableHeader from '../containers/EmployeeTableHeader';
 // import TableRow from './EmployeeTableRow';
 import TableRow from '../containers/EmployeeRow';
 

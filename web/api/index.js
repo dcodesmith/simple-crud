@@ -28,6 +28,7 @@ class EmployeeApi {
   }
 
   static delete(row) {
+    // NOTE - Considering passing the employees index
     return request
             .del(`${API_URL}/${row.email}`)
             .then((response) => {

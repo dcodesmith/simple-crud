@@ -14,36 +14,53 @@ class EmployeeForm extends Component {
         surname: '',
         contact_number: '',
         email: ''
+      },
+      errors: {
+        firstname: [],
+        surname: [],
+        contact_number: [],
+        email: []
       }
     };
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.isValid = this.isValid.bind(this);
+
   }
 
   handleChange(field, e) {
-    let employee = this.state.employee;
-    let newEmployee = {};
+    let { employee } = this.state;
 
-    newEmployee[field] = e.target.value;
-    employee = Object.assign({}, employee, newEmployee);
+    employee = Object.assign({}, employee, { [field]: e.target.value });
 
     this.setState({ employee });
   }
 
+  isValid() {
+    console.log(this.state.employee);
+    return;
+  }
+
   onSubmit(e) {
-    const { employee } = this.state;
+    const { employee, errors } = this.state;
     const { dispatch } = this.props;
 
     e.preventDefault();
+
+    this.isValid();
+    return;
 
     dispatch(createEmployee(employee));
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <form className="form" onSubmit={this.onSubmit}>
         <div className="row">
             <input type="text" name="firstname" className="input-field" placeholder="Firstname" onChange={(evt) => this.handleChange('firstname', evt)} />
+
             <input type="text" name="surname" className="input-field" placeholder="Surname" onChange={(evt) => this.handleChange('surname', evt)} />
         </div>
         <div className="row">

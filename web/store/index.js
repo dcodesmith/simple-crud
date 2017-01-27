@@ -6,9 +6,6 @@ import rootReducer from '../reducers';
 
 /* eslint-disable no-underscore-dangle */
 
-// NOTE - Add Chrome extension https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
-// Need to change this to npm module and enable only in development mode
-
 export default function configureStore(initialState) {
   return createStore(
     rootReducer,
