@@ -1,25 +1,19 @@
 import { connect } from 'react-redux';
-// import { deleteEmployee, updateEmployee } from '../actions';
+import { sortEmployees } from '../actions';
 
 import EmployeeTableHeader from '../components/EmployeeTableHeader';
 
 function mapStateToProps(state) {
-  const { employees } = state;
+  const { employees, sortOrder } = state;
 
   // from reducer/index.js
-  console.log(employees);
-  return { employees };
+  return { employees, sortOrder };
 }
-
-const sort = (field) => {
-  console.lo(this.state);
-  console.log(field);
-};
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSort: field => sort(field)
+    onSort: (field, [...data], sortOrder) => dispatch(sortEmployees(field, data, sortOrder))
   };
 }
 
-export default connect(mapStateToProps, null)(EmployeeTableHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeTableHeader);

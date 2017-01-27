@@ -1,4 +1,4 @@
-import { findIndex, filter } from 'lodash';
+import { findIndex } from 'lodash';
 import {
   CREATE_EMPLOYEE_SUCCESS,
   READ_EMPLOYEES_SUCCESS,
@@ -36,6 +36,17 @@ export default function employeeReducer(state = initialState.employees, action) 
         ...state.slice(index + 1)
       ];
     }
+
+    // case SORT_EMPLOYEES: {
+    //   console.log('state', state);
+    //   console.log('action', action);
+    //   // const { employees, sortOrder } = action;
+
+    //   // if ( a[field] < b[field] ) return state.sortOrder === SORT_ASC ? -1 : 1;
+    //   // if ( a[field] > b[field] ) return state.sortOrder === SORT_ASC ? 1: -1;
+
+    //   return { employees: action.employees, sortOrder: action.sortOrder };
+    // }
 
     default:
       return state;

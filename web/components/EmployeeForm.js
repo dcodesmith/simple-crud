@@ -47,9 +47,6 @@ class EmployeeForm extends Component {
 
     e.preventDefault();
 
-    this.isValid();
-    return;
-
     dispatch(createEmployee(employee));
   }
 

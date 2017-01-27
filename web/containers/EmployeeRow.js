@@ -5,7 +5,6 @@ import EmployeeTableRow from '../components/EmployeeTableRow';
 
 function mapStateToProps(state) {
   const { employees } = state;
-
   // from reducer/index.js
 
   return { employees };

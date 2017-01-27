@@ -3,7 +3,8 @@ import {
   READ_EMPLOYEES_SUCCESS,
   UPDATE_EMPLOYEE_SUCCESS,
   DELETE_EMPLOYEE_SUCCESS,
-  SORT_EMPLOYEES_SUCCESS
+  SORT_EMPLOYEES,
+  SORT_ASC
 } from './constants';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 import api from '../api';
@@ -24,8 +25,8 @@ export function deteleEmployeeSuccess(employee) {
   return { type: DELETE_EMPLOYEE_SUCCESS, employee };
 }
 
-export function sortEmployeesSuccess(employees) {
-  return { type: SORT_EMPLOYEES_SUCCESS, employees };
+export function sort(employees, sortOrder) {
+  return { type: SORT_EMPLOYEES, employees, sortOrder };
 }
 
 export function createEmployee(data) {
@@ -77,23 +78,22 @@ export function deleteEmployee(email) {
   };
 }
 
-export function sortEmployees(data, field) {
+export function sortEmployees(field, employees, sortOrder) {
   return (dispatch) => {
-    data.sort((a, b) => {
-      // console.log('a', a);
-      // console.log('b', b);
-
-      if (a[field] < b[field] ) {
+    employees.sort((a, b) => {
+      if (a[field] < b[field]) {
         return -1;
       }
 
-      if (a[field] < b[field] ) {
+      if (a[field] > b[field]) {
         return 1;
       }
 
       return 0;
     });
 
-    dispatch();
-  }
+    console.log('employees', employees);
+
+    dispatch(sort(employees, sortOrder, field));
+  };
 }
