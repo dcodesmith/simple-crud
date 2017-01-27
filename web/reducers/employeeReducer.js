@@ -1,4 +1,4 @@
-import { findIndex } from 'lodash';
+import { findIndex, filter } from 'lodash';
 import {
   CREATE_EMPLOYEE_SUCCESS,
   READ_EMPLOYEES_SUCCESS,
@@ -14,24 +14,21 @@ export default function employeeReducer(state = initialState.employees, action) 
     }
 
     case READ_EMPLOYEES_SUCCESS: {
-      console.log('read', action);
-
       return action.employees;
     }
 
     case UPDATE_EMPLOYEE_SUCCESS: {
       const index = findIndex(state, action.employee.row);
 
-      console.log('state', state);
-      console.log('lll', ...state.slice(0, index));
-
       return [
         ...state.slice(0, index),
-        Object.assign({}, state[index], action.employee.fieldsToUpdate)
+        Object.assign({}, state[index], action.employee.fieldsToUpdate),
+        ...state.slice(index + 1)
       ];
     }
 
     case DELETE_EMPLOYEE_SUCCESS: {
+      // NOTE - Considering passing the employees index
       const index = findIndex(state, action.employee);
 
       return [
